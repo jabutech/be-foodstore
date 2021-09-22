@@ -72,7 +72,7 @@ orderSchema.virtual("items_count").get(function () {
 });
 
 // Menggunakan 'mongoose hook' untuk membuat invoice ketika order selesai dibuat
-orderSchema.exports("save", async function () {
+orderSchema.post("save", async function () {
   // (1) Buat total price dengan mengakses property didalam schema menggunakan keyword 'this'
   let sub_total = this.order_items.reduce(
     (sum, item) => (sum += item.price * item.qty),

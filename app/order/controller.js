@@ -1,5 +1,7 @@
 // use mongoose
-const mongoose = require(mongoose);
+const mongoose = require("mongoose");
+// Use subject untuk mengecek apakah user berhak memanipulasi data
+const { subject } = require("@casl/ability");
 // Use Order model
 const Order = require("./model");
 // Use OrderItem model
@@ -10,9 +12,7 @@ const CartItem = require("../cart-item/model");
 const DeliveryAddress = require("../delivery-address/model");
 // Use policyFor untuk mengecekan hak akses user
 const { policyFor } = require("../policy");
-// Use subject untuk mengecek apakah user berhak memanipulasi data
-const { subject } = require("@casl/ability");
-const { Mongoose } = require("mongoose");
+
 const { find } = require("./model");
 
 // Function index

@@ -1,0 +1,44 @@
+# User docker-compose
+version: "3.7"
+# Implement service for run app docker
+services:
+  # use mongodb
+  mongodb:
+    # With image mongodb:latest
+    image: mongo:latest
+    # Create container name
+    container_name: mongodb-foodstore
+    # Set volumes on root directory
+    volumes:
+      - ./mongodb-db/:/data/db
+    # Set networks
+    networks:
+      - foodstore-network
+    # Set port for publish to public
+    ports:
+      - 27018:27017
+  # Build foodstore app
+  foodstore-app:
+    # Set ketika docker-compose run build image appnya
+    # dengan menggunakan dockerfile
+    build: .
+    # Set container name
+    container_name: app-foodstore
+    # Set network
+    networks:
+      - foodstore-network
+    # set port app
+    ports:
+      - 3001:3000
+    # set environment variable untuk docker-compose wait
+    # 'WAIT_HOST' digunakan untuk menunggu container yang dibutuhkan sampai berjalan, baru container ini dijalankan
+    environment:
+      WAIT_HOST: mongodb-foodstore:27018
+    # Set volumes
+    # '.' artinya langsung ngelink ke folder root pada real project
+    # Jadi ketika ada perubahan langsung ngelink dan update ke dalam container
+    volumes:
+      - .:/app
+# Define network yang akan digunakan
+networks:
+  foodstore-network:

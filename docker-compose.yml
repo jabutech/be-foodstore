@@ -8,15 +8,19 @@ services:
     image: mongo:latest
     # Create container name
     container_name: mongodb-foodstore
+    # Set user and password mongodb
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: 123456
     # Set volumes on root directory
     volumes:
-      - ./mongodb-db/:/data/db
+      - ./mongo-db/:/data/db
     # Set networks
     networks:
       - foodstore-network
     # Set port for publish to public
     ports:
-      - 27018:27017
+      - 27017:27017
   # Build foodstore app
   foodstore-app:
     # Set ketika docker-compose run build image appnya
@@ -33,7 +37,7 @@ services:
     # set environment variable untuk docker-compose wait
     # 'WAIT_HOST' digunakan untuk menunggu container yang dibutuhkan sampai berjalan, baru container ini dijalankan
     environment:
-      WAIT_HOST: mongodb-foodstore:27018
+      WAIT_HOST: mongodb-foodstore:27017
     # Set volumes
     # '.' artinya langsung ngelink ke folder root pada real project
     # Jadi ketika ada perubahan langsung ngelink dan update ke dalam container

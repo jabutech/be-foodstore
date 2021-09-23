@@ -22,5 +22,7 @@ RUN chmod +x /wait
 # Install dependecies
 RUN npm install
 
+EXPOSE 3000
+
 # Start app
 CMD /wait && npm start

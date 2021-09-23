@@ -14,13 +14,13 @@ services:
       MONGO_INITDB_ROOT_PASSWORD: 123456
     # Set volumes on root directory
     volumes:
-      - ./mongo-db/:/data/db
+      - ./mongodb-data:/data/db
     # Set networks
     networks:
       - foodstore-network
     # Set port for publish to public
     ports:
-      - 27017:27017
+      - 27019:27017
   # Build foodstore app
   foodstore-app:
     # Set ketika docker-compose run build image appnya

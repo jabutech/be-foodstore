@@ -1,5 +1,5 @@
-docker-compose.yml
 node_modules/
-mongo-db/
+mongodb-data/
 .env
 .vscode/
+docker-compose.yml
